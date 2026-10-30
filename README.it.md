@@ -10,13 +10,15 @@ Alternativa open source e local-first a Notion, gira interamente sulla tua
 macchina. Nessun account. Nessun abbonamento. Nessuna telemetria. I tuoi
 appunti non lasciano mai il tuo dispositivo.
 
+▶️ **[Provala online](https://taccuino.onrender.com)** — senza installare niente
+
 [![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-9A3D20?style=flat-square)](LICENSE)
 [![Built with Next.js 16](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=nextdotjs)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![SQLite](https://img.shields.io/badge/dati-SQLite%20(locali)-003B57?style=flat-square&logo=sqlite&logoColor=white)](https://sqlite.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-benvenute-b9542f?style=flat-square)](CONTRIBUTING.md)
 
-[Funzionalità](#-funzionalità) · [Cosa la rende diversa](#-cosa-la-rende-diversa) · [Avvio rapido](#-avvio-rapido) · [Import da Notion](#-importa-il-tuo-workspace-notion) · [Roadmap](#-roadmap)
+[🔴 Demo online](https://taccuino.onrender.com) · [Funzionalità](#-funzionalità) · [Cosa la rende diversa](#-cosa-la-rende-diversa) · [Avvio rapido](#-avvio-rapido) · [Import da Notion](#-importa-il-tuo-workspace-notion) · [Roadmap](#-roadmap)
 
 [English](README.md) | **Italiano**
 

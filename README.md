@@ -9,6 +9,8 @@
 An open-source, local-first Notion alternative that runs entirely on your machine.
 No account. No subscription. No telemetry. Your notes never leave your device.
 
+▶️ **[Try the live demo](https://taccuino.onrender.com)** — no install, no signup
+
 [![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-9A3D20?style=flat-square)](LICENSE)
 [![Built with Next.js 16](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=nextdotjs)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -16,7 +18,7 @@ No account. No subscription. No telemetry. Your notes never leave your device.
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-b9542f?style=flat-square)](CONTRIBUTING.md)
 [![No tracking](https://img.shields.io/badge/tracking-none-4a7c59?style=flat-square)](#why-taccuino)
 
-[Features](#-features) · [What makes it different](#-what-makes-it-different) · [Quick start](#-quick-start) · [Import from Notion](#-import-your-notion-workspace) · [Roadmap](#-roadmap)
+[🔴 Live demo](https://taccuino.onrender.com) · [Features](#-features) · [What makes it different](#-what-makes-it-different) · [Quick start](#-quick-start) · [Import from Notion](#-import-your-notion-workspace) · [Roadmap](#-roadmap)
 
 **English** | [Italiano](README.it.md)
 
