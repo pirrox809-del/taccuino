@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Page {
+  id         String        @id @default(cuid())
+  parentId   String?
+  parent     Page?         @relation("PageTree", fields: [parentId], references: [id], onDelete: Cascade)
+  children   Page[]        @relation("PageTree")
+  title      String        @default("")
+  icon       String?
+  position   Int           @default(0)
+  isFavorite Boolean       @default(false)
+  kind       String        @default("doc") // "doc" | "database"
+  cover      String?
+  deletedAt  DateTime?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  blocks     Block[]
+  versions   Version[]
+  database   Database?
+  writingDays WritingDay[]
+
+  @@index([parentId])
+  @@index([deletedAt])
+}
+
+/// Parole scritte su una pagina in un dato giorno (per streak/obiettivo).
+/// "words" è lo snapshot più recente del conteggio parole della pagina quel giorno:
+/// il totale giornaliero è la SOMMA degli snapshot delle pagine toccate quel giorno.
+model WritingDay {
+  id        String   @id @default(cuid())
+  date      String // "YYYY-MM-DD", data locale del server (app local-first)
+  pageId    String
+  page      Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  words     Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@unique([pageId, date])
+  @@index([date])
+}
+
+model Block {
+  id       String  @id @default(cuid())
+  pageId   String
+  page     Page    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  type     String
+  content  String  @default("")
+  checked  Boolean @default(false)
+  language String?
+  url      String?
+  caption  String?
+  icon     String?
+  indent   Int     @default(0)
+  position Int     @default(0)
+
+  @@index([pageId, position])
+}
+
+model Database {
+  id         String @id @default(cuid())
+  pageId     String @unique
+  page       Page   @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  properties String @default("[]") // JSON DatabaseProperty[]
+  rows       Row[]
+}
+
+model Row {
+  id         String   @id @default(cuid())
+  databaseId String
+  database   Database @relation(fields: [databaseId], references: [id], onDelete: Cascade)
+  title      String   @default("")
+  icon       String?
+  properties String   @default("{}") // JSON RowProperties
+  position   Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([databaseId, position])
+}
+
+model Version {
+  id        String   @id @default(cuid())
+  pageId    String
+  page      Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  title     String   @default("")
+  blocks    String   @default("[]")
+  createdAt DateTime @default(now())
+
+  @@index([pageId, createdAt])
+}
+
+model Attachment {
+  id        String   @id @default(cuid())
+  mime      String
+  size      Int
+  data      String   @default("")
+  createdAt DateTime @default(now())
+}

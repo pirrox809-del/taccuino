@@ -1,0 +1,19 @@
+{
+  "name": "Taccuino",
+  "short_name": "Taccuino",
+  "description": "Appunti a blocchi, gratis e solo tuoi.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fffaf4",
+  "theme_color": "#a64d31",
+  "lang": "it",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
