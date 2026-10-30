@@ -1,0 +1,40 @@
+# dependencies & build artifacts (rebuilt inside the image)
+node_modules
+.next
+out
+build
+
+# local data — never bake user notes into an image
+db
+*.db
+*.db-journal
+
+# environment & secrets
+.env*
+!.env.example
+
+# git / github metadata
+.git
+.github
+
+# sandbox & tooling files not part of the app
+.zscripts
+agent-ctx
+Caddyfile
+examples
+mini-services
+download
+upload
+tool-results
+tests
+
+# logs
+*.log
+dev.log
+server.log
+
+# misc
+.DS_Store
+*.pem
+.vercel
+coverage

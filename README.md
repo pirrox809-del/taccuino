@@ -141,6 +141,29 @@ bun run start
 
 **Backups**: copy `db/custom.db`. That's the whole backup story.
 
+## ☁️ Try it online — one-click demo
+
+Don't want to install anything? Deploy your own instance on Render's free
+tier — no credit card needed:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/pirrox809-del/taccuino)
+
+1. Click the button and sign in with your GitHub account
+2. Click **Apply** — Render builds the Docker image (first build ~5 min)
+3. Open your `https://taccuino-xxxx.onrender.com` — the workspace seeds
+   itself with demo pages on first open
+
+> The free plan sleeps after 15 minutes idle and uses an ephemeral disk, so
+> demo data resets on wake. Great for a look around — for real notes, run
+> Taccuino locally. That's the whole point 🙂
+
+**Or self-host with Docker**, with a persistent volume for your data:
+
+```bash
+docker build -t taccuino .
+docker run -d -p 3000:3000 -v taccuino-data:/app/db taccuino
+```
+
 ## 📥 Import your Notion workspace
 
 1. In Notion: **Settings → Export → Markdown & CSV**, export everything as ZIP

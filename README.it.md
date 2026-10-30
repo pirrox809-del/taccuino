@@ -131,6 +131,30 @@ demo. Cancella le pagine demo e rendilo tuo.
 
 **Backup**: copia `db/custom.db`. Tutto qui.
 
+## ☁️ Provala online — demo con un click
+
+Non hai voglia di installare niente? Distribuisci la tua istanza sul piano
+gratuito di Render — serve solo l'account GitHub, nessuna carta:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/pirrox809-del/taccuino)
+
+1. Clicca il pulsante e accedi con il tuo account GitHub
+2. Clicca **Apply** — Render costruisce l'immagine Docker (prima volta ~5 min)
+3. Apri il tuo indirizzo `https://taccuino-xxxx.onrender.com` — al primo
+   avvio nascono le pagine demo
+
+> Il piano gratuito va in sleep dopo 15 minuti di inattività e il disco è
+> effimero: i dati demo si azzerano al risveglio. Perfetto per dare
+> un'occhiata — per le note vere, esegui Taccuino in locale. È proprio
+> l'idea di partenza 🙂
+
+**Oppure self-hosting con Docker**, con volume persistente per i tuoi dati:
+
+```bash
+docker build -t taccuino .
+docker run -d -p 3000:3000 -v taccuino-data:/app/db taccuino
+```
+
 ## 📥 Importa il tuo workspace Notion
 
 1. In Notion: **Impostazioni → Esporta → Markdown & CSV**, esporta tutto in ZIP

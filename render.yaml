@@ -1,0 +1,14 @@
+# Render Blueprint — one-click deploy of Taccuino (free plan).
+# Docs: https://render.com/docs/blueprint-spec
+#
+# Note: the free plan uses an ephemeral disk, so demo data resets when
+# the service restarts. For persistent self-hosting run the Docker image
+# with a volume mounted at /app/db, or attach a Render disk (paid plans).
+
+services:
+  - type: web
+    name: taccuino
+    runtime: docker
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /api/pages
