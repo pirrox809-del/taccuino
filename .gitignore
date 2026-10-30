@@ -60,3 +60,9 @@ agent-ctx/
 upload/
 download/
 tool-results/
+
+# sandbox / environment-specific (not part of the app)
+.zscripts/
+Caddyfile
+examples/
+mini-services/

@@ -116,7 +116,7 @@ tua macchina:
 **Requisiti:** [Node.js](https://nodejs.org) 20+ (o [Bun](https://bun.sh)) — basta.
 
 ```bash
-git clone https://github.com/<tuo-utente>/taccuino.git
+git clone https://github.com/pirrox809-del/taccuino.git
 cd taccuino
 bun install            # oppure: npm install
 bun run db:push        # crea il database SQLite locale

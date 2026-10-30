@@ -119,7 +119,7 @@ Things Notion doesn't give you — all computed **locally**, nothing ever leaves
 **Requirements:** [Node.js](https://nodejs.org) 20+ (or [Bun](https://bun.sh)) — that's it.
 
 ```bash
-git clone https://github.com/<your-username>/taccuino.git
+git clone https://github.com/pirrox809-del/taccuino.git
 cd taccuino
 bun install            # or: npm install
 bun run db:push        # create the local SQLite database (or: npx prisma db push)
@@ -212,8 +212,7 @@ comparison purposes.*
 
 <div align="center">
 
-<!-- Dopo la pubblicazione, sostituisci YOUR_USERNAME con il tuo nome utente GitHub
-     e incolla qui il grafico: https://api.star-history.com/svg?repos=YOUR_USERNAME/taccuino&type=Date -->
+[![Star History Chart](https://api.star-history.com/svg?repos=pirrox809-del/taccuino&type=Date)](https://star-history.com/#pirrox809-del/taccuino&Date)
 
 Made with 🤎 and zero telemetry.
 </div>
