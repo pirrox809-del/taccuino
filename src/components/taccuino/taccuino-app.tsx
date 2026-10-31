@@ -29,6 +29,7 @@ import { useI18n } from '@/lib/i18n'
 import { usePrefsStore } from '@/lib/prefs-store'
 import type { Block, DatabaseProperty, DatabaseRow, PageMeta, PageWithBlocks } from '@/lib/types'
 import { cn } from '@/lib/utils'
+import { AiAssistant } from './ai-assistant'
 import { DatabaseView } from './database/database-view'
 import { GraphView } from './graph-view'
 import { Logo } from './logo'
@@ -110,6 +111,7 @@ export function TaccuinoApp() {
   // ---- funzioni uniche ----
   const [focusMode, setFocusMode] = React.useState(false)
   const [graphOpen, setGraphOpen] = React.useState(false)
+  const [aiOpen, setAiOpen] = React.useState(false)
   const [outlineOpen, setOutlineOpen] = React.useState(false)
   const [shortcutsOpen, setShortcutsOpen] = React.useState(false)
   /** Blocchi live della pagina corrente (per struttura e diff versione). */
@@ -515,6 +517,7 @@ export function TaccuinoApp() {
       templateOpen ||
       graphOpen ||
       shortcutsOpen ||
+      aiOpen ||
       mobileNavOpen,
     [
       searchOpen,
@@ -524,6 +527,7 @@ export function TaccuinoApp() {
       templateOpen,
       graphOpen,
       shortcutsOpen,
+      aiOpen,
       mobileNavOpen,
     ]
   )
@@ -545,6 +549,11 @@ export function TaccuinoApp() {
       if (mod && e.shiftKey && key === 'g') {
         e.preventDefault()
         setGraphOpen(true)
+        return
+      }
+      if (mod && e.shiftKey && key === 'a') {
+        e.preventDefault()
+        setAiOpen(true)
         return
       }
       if (mod && e.shiftKey && key === 'o') {
@@ -723,6 +732,20 @@ export function TaccuinoApp() {
                 >
                   <Waypoints className="size-4" aria-hidden />
                 </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={cn(
+                    'size-8 cursor-pointer text-muted-foreground hover:text-foreground',
+                    aiOpen && 'bg-accent text-accent-foreground'
+                  )}
+                  onClick={() => setAiOpen(true)}
+                  aria-label={t('aiAssistant')}
+                  aria-pressed={aiOpen}
+                  title={`${t('aiAssistant')} (Ctrl+Shift+A)`}
+                >
+                  <Sparkles className="size-4" aria-hidden />
+                </Button>
                 {currentPage && currentPage.kind === 'doc' ? (
                   <Button
                     variant="ghost"
@@ -879,6 +902,13 @@ export function TaccuinoApp() {
         onSelectPage={(id) => void selectPage(id)}
       />
       <ShortcutsDialog open={shortcutsOpen} onOpenChange={setShortcutsOpen} />
+      <AiAssistant
+        open={aiOpen}
+        onOpenChange={setAiOpen}
+        currentPage={currentPage ? { id: currentPage.id, title: currentPage.title } : null}
+        onOpenPage={(id) => void selectPage(id)}
+        onPagesChanged={() => void refreshPages()}
+      />
     </TooltipProvider>
   )
 }

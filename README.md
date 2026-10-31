@@ -103,6 +103,7 @@ Things Notion doesn't give you — all computed **locally**, nothing ever leaves
 | 🧭 | **Outline panel** (`Ctrl+Shift+O`) | Clickable table of contents that highlights the section you're reading |
 | ⌨️ | **Cheat sheet** (press `?`) | Every keyboard shortcut in one dialog. No web searches needed |
 | 📊 | **Stats without spies** | Word/character/reading-time stats per page, computed locally. No analytics lib, ever |
+| 🤖 | **AI assistant** (`Ctrl+Shift+A`) | A chatbot that **operates your workspace for real**: "create a Brainstorming page with 3 travel ideas", "summarize this page", "open Project". It searches, reads, writes Markdown → real blocks and opens pages; every action is confirmed with a clickable chip. Runs on a locally configured LLM endpoint — nothing leaves your machine without one |
 
 <div align="center">
 <table>
@@ -112,6 +113,9 @@ Things Notion doesn't give you — all computed **locally**, nothing ever leaves
 </tr>
 <tr>
 <td colspan="2"><img src=".github/assets/focus-mode.png" alt="Focus mode" width="720"></td>
+</tr>
+<tr>
+<td colspan="2"><img src=".github/assets/ai-assistant.png" alt="AI assistant creating a page on command" width="720"></td>
 </tr>
 </table>
 </div>
@@ -185,6 +189,7 @@ as a nested ZIP, and databases as Notion-compatible CSV.
 | `[[` | Link to another page |
 | `Ctrl/Cmd + Shift + F` | Focus mode |
 | `Ctrl/Cmd + Shift + G` | Graph view |
+| `Ctrl/Cmd + Shift + A` | AI assistant |
 | `Ctrl/Cmd + Shift + O` | Outline panel |
 | `?` | Keyboard cheat sheet |
 | `Tab` / `Shift + Tab` | Indent / outdent block |

@@ -103,12 +103,17 @@ tua macchina:
 | 📈 | **Attività di scrittura** | Streak, obiettivo giornaliero con progresso, mini-grafico di 14 giorni — nel tuo database |
 | 🧭 | **Pannello struttura** (`Ctrl+Shift+O`) | Indice cliccabile che evidenzia la sezione che stai leggendo |
 | ⌨️ | **Cheat sheet** (tasto `?`) | Tutte le scorciatoie in un dialogo, zero ricerche sul web |
+| 📊 | **Statistiche senza spioni** | Parole/caratteri/lettura per pagina, calcolate in locale. Nessuna libreria di analytics, mai |
+| 🤖 | **Assistente AI** (`Ctrl+Shift+A`) | Un chatbot che **opera davvero sul workspace**: «crea una pagina Brainstorming con 3 idee di viaggio», «riassumi questa pagina», «apri Project». Cerca, legge, scrive Markdown → blocchi veri e apre le pagine; ogni azione è confermata con una chip cliccabile. Usa un endpoint LLM configurato in locale — senza, nulla lascia la tua macchina |
 
 <div align="center">
 <table>
 <tr>
 <td><img src=".github/assets/graph-view.png" alt="Vista grafo" width="480"></td>
 <td><img src=".github/assets/version-diff.png" alt="Diff versioni" width="480"></td>
+</tr>
+<tr>
+<td colspan="2"><img src=".github/assets/ai-assistant.png" alt="Assistente AI che crea una pagina su comando" width="720"></td>
 </tr>
 </table>
 </div>

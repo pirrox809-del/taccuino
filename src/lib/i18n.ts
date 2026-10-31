@@ -372,10 +372,29 @@ const it = {
   themeDark: 'Scuro',
   langToggle: 'Cambia lingua',
 
+  // Assistente AI
+  aiAssistant: 'Assistente AI',
+  aiPanelTagline: 'Cerca, crea e organizza le pagine per te',
+  aiWelcomeTitle: 'Ciao! Sono l\u2019assistente di Taccuino',
+  aiWelcomeBody: 'Posso cercare nei tuoi appunti, creare pagine, scriverci dentro e aprirle. Prova una di queste:',
+  aiPlaceholder: 'Chiedi qualcosa o dai un comando…',
+  aiSend: 'Invia messaggio',
+  aiNewChat: 'Nuova conversazione',
+  aiThinking: 'Sta pensando…',
+  aiError: 'Assistente non disponibile in questo momento. Riprova più tardi.',
+  aiChipCreated: 'Creata',
+  aiChipUpdated: 'Aggiornata',
+  aiChipOpened: 'Aperta',
+  aiSuggestion1: 'Crea una pagina “Brainstorming” con 5 idee di progetti open source',
+  aiSuggestion2: 'Riassumi i punti chiave di questa pagina',
+  aiSuggestion3: 'Cerca tutte le pagine che parlano di progetti',
+  aiSuggestion4: 'Aggiungi una checklist “Prossimi passi” a questa pagina',
+  shortcutsAi: 'Apri l\u2019assistente AI',
+
   // Accessibilità / footer
   mainContentLabel: 'Contenuto principale',
   footerLicense: 'Open source · AGPL-3.0',
-  footerVersion: '0.2',
+  footerVersion: '0.3',
   skipToContent: 'Salta al contenuto',
 } as const
 
@@ -743,10 +762,29 @@ const en: Dict = {
   themeDark: 'Dark',
   langToggle: 'Switch language',
 
+  // AI assistant
+  aiAssistant: 'AI assistant',
+  aiPanelTagline: 'Search, create and organize pages for you',
+  aiWelcomeTitle: 'Hi! I\u2019m Taccuino\u2019s assistant',
+  aiWelcomeBody: 'I can search your notes, create pages, write into them and open them. Try one of these:',
+  aiPlaceholder: 'Ask something or give a command…',
+  aiSend: 'Send message',
+  aiNewChat: 'New conversation',
+  aiThinking: 'Thinking…',
+  aiError: 'The assistant is unavailable right now. Please try again later.',
+  aiChipCreated: 'Created',
+  aiChipUpdated: 'Updated',
+  aiChipOpened: 'Opened',
+  aiSuggestion1: 'Create a “Brainstorming” page with 5 open source project ideas',
+  aiSuggestion2: 'Summarize the key points of this page',
+  aiSuggestion3: 'Find all pages that mention projects',
+  aiSuggestion4: 'Add a “Next steps” checklist to this page',
+  shortcutsAi: 'Open the AI assistant',
+
   // Accessibility / footer
   mainContentLabel: 'Main content',
   footerLicense: 'Open source · AGPL-3.0',
-  footerVersion: '0.2',
+  footerVersion: '0.3',
   skipToContent: 'Skip to content',
 }
 

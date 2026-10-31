@@ -29,6 +29,7 @@ const NAVIGATION: ShortcutRow[] = [
   { keys: ['Ctrl', 'K'], labelKey: 'shortcutsSearch' },
   { keys: ['Ctrl', 'Shift', 'F'], labelKey: 'shortcutsFocus' },
   { keys: ['Ctrl', 'Shift', 'G'], labelKey: 'shortcutsGraph' },
+  { keys: ['Ctrl', 'Shift', 'A'], labelKey: 'shortcutsAi' },
   { keys: ['Ctrl', 'Shift', 'O'], labelKey: 'shortcutsOutline' },
   { keys: ['?'], labelKey: 'shortcutsSheet' },
   { keys: ['Esc'], labelKey: 'shortcutsEscape' },
