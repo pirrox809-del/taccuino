@@ -7,8 +7,10 @@
  */
 import * as React from 'react'
 import {
+  BookOpen,
   Github,
   Heart,
+  Inbox,
   Keyboard,
   Link2,
   ListTree,
@@ -31,10 +33,13 @@ import type { Block, DatabaseProperty, DatabaseRow, PageMeta, PageWithBlocks } f
 import { cn } from '@/lib/utils'
 import { AiAssistant } from './ai-assistant'
 import { DatabaseView } from './database/database-view'
+import { FocusTimer } from './focus-timer'
 import { GraphView } from './graph-view'
 import { Logo } from './logo'
 import { OutlinePanel } from './outline-panel'
+import { PageReader } from './page-reader'
 import { PageView, type PageStats, type SaveStatus } from './page-view'
+import { QuickCapture } from './quick-capture'
 import { SearchPalette } from './search-palette'
 import { ShortcutsDialog } from './shortcuts-dialog'
 import { Sidebar, type DropZone } from './sidebar'
@@ -114,6 +119,8 @@ export function TaccuinoApp() {
   const [aiOpen, setAiOpen] = React.useState(false)
   const [outlineOpen, setOutlineOpen] = React.useState(false)
   const [shortcutsOpen, setShortcutsOpen] = React.useState(false)
+  const [readerOpen, setReaderOpen] = React.useState(false)
+  const [quickCaptureOpen, setQuickCaptureOpen] = React.useState(false)
   /** Blocchi live della pagina corrente (per struttura e diff versione). */
   const [liveBlocks, setLiveBlocks] = React.useState<Block[]>([])
 
@@ -518,6 +525,8 @@ export function TaccuinoApp() {
       graphOpen ||
       shortcutsOpen ||
       aiOpen ||
+      readerOpen ||
+      quickCaptureOpen ||
       mobileNavOpen,
     [
       searchOpen,
@@ -528,6 +537,8 @@ export function TaccuinoApp() {
       graphOpen,
       shortcutsOpen,
       aiOpen,
+      readerOpen,
+      quickCaptureOpen,
       mobileNavOpen,
     ]
   )
@@ -554,6 +565,11 @@ export function TaccuinoApp() {
       if (mod && e.shiftKey && key === 'a') {
         e.preventDefault()
         setAiOpen(true)
+        return
+      }
+      if (mod && e.shiftKey && key === 'u') {
+        e.preventDefault()
+        setQuickCaptureOpen(true)
         return
       }
       if (mod && e.shiftKey && key === 'o') {
@@ -590,6 +606,11 @@ export function TaccuinoApp() {
       navigator.serviceWorker.register('/sw.js').catch(() => undefined)
     }
   }, [])
+
+  // il lettore vocale segue la pagina: a ogni cambio pagina si chiude
+  React.useEffect(() => {
+    setReaderOpen(false)
+  }, [selectedId])
 
   const trashedPages = React.useMemo(
     () =>
@@ -722,6 +743,23 @@ export function TaccuinoApp() {
                     <ListTree className="size-4" aria-hidden />
                   </Button>
                 ) : null}
+                {currentPage && currentPage.kind === 'doc' ? (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className={cn(
+                      'hidden size-8 cursor-pointer text-muted-foreground hover:text-foreground sm:flex',
+                      readerOpen && 'bg-accent text-accent-foreground'
+                    )}
+                    onClick={() => setReaderOpen((r) => !r)}
+                    aria-label={t('readerTitle')}
+                    aria-pressed={readerOpen}
+                    title={t('readerTitle')}
+                  >
+                    <BookOpen className="size-4" aria-hidden />
+                  </Button>
+                ) : null}
+                <FocusTimer />
                 <Button
                   variant="ghost"
                   size="icon"
@@ -854,6 +892,24 @@ export function TaccuinoApp() {
                 </span>
               </footer>
             ) : null}
+
+            {/* Pulsante flottante acquisizione rapida */}
+            {!focusMode ? (
+              <button
+                type="button"
+                onClick={() => setQuickCaptureOpen(true)}
+                aria-label={t('quickCaptureTitle')}
+                title={`${t('quickCaptureTitle')} (Ctrl+Shift+U)`}
+                className="absolute bottom-12 right-4 z-30 flex size-11 cursor-pointer items-center justify-center rounded-full border bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <Inbox className="size-5" aria-hidden />
+              </button>
+            ) : null}
+
+            {/* Lettore vocale della pagina */}
+            {readerOpen && currentPage && currentPage.kind === 'doc' ? (
+              <PageReader blocks={liveBlocks} onClose={() => setReaderOpen(false)} />
+            ) : null}
           </main>
         </div>
       </div>
@@ -902,6 +958,12 @@ export function TaccuinoApp() {
         onSelectPage={(id) => void selectPage(id)}
       />
       <ShortcutsDialog open={shortcutsOpen} onOpenChange={setShortcutsOpen} />
+      <QuickCapture
+        open={quickCaptureOpen}
+        onOpenChange={setQuickCaptureOpen}
+        onOpenPage={(id) => void selectPage(id)}
+        onSaved={() => void refreshPages()}
+      />
       <AiAssistant
         open={aiOpen}
         onOpenChange={setAiOpen}

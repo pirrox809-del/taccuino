@@ -105,6 +105,10 @@ tua macchina:
 | ⌨️ | **Cheat sheet** (tasto `?`) | Tutte le scorciatoie in un dialogo, zero ricerche sul web |
 | 📊 | **Statistiche senza spioni** | Parole/caratteri/lettura per pagina, calcolate in locale. Nessuna libreria di analytics, mai |
 | 🤖 | **Assistente AI** (`Ctrl+Shift+A`) | Un chatbot che **opera davvero sul workspace**: «crea una pagina Brainstorming con 3 idee di viaggio», «riassumi questa pagina», «apri Project». Cerca, legge, scrive Markdown → blocchi veri e apre le pagine; ogni azione è confermata con una chip cliccabile. Usa un endpoint LLM configurato in locale — senza, nulla lascia la tua macchina |
+| 🎙 | **Chat vocale** | Parla con l'assistente AI: la voce diventa testo tramite il riconoscimento integrato del browser (IT/EN), e ogni risposta può essere letta ad alta voce con un tap. Zero dipendenze, zero installazioni |
+| 📖 | **Lettore vocale** | Legge la pagina ad alta voce evidenziando blocco per blocco, con controllo velocità e skip — rileggi mentre cammini, riposa gli occhi, accessibilità inclusa |
+| 📥 | **Acquisizione rapida** (`Ctrl+Shift+U`) | Ti viene un pensiero mentre sei in un'altra pagina: una scorciatoia (o il pulsante flottante) e finisce nella pagina Inbox. Senza cambiare contesto |
+| ⏱ | **Timer di concentrazione** | Pomodoro integrato (15/25/45/60′) che sopravvive ai ricaricamenti, bip via WebAudio — niente file audio, niente account, nessun paywall "pro" su un timer da cucina |
 
 <div align="center">
 <table>

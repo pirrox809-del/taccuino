@@ -7,7 +7,7 @@
  * localStorage: local-first, come il resto dell'app.
  */
 import * as React from 'react'
-import { ArrowUp, Eraser, FilePen, FilePlus2, SquareArrowOutUpRight, Sparkles } from 'lucide-react'
+import { ArrowUp, Eraser, FilePen, FilePlus2, Mic, Square, SquareArrowOutUpRight, Sparkles, Volume2 } from 'lucide-react'
 import {
   Sheet,
   SheetContent,
@@ -18,6 +18,43 @@ import {
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { useI18n } from '@/lib/i18n'
+import { cn } from '@/lib/utils'
+
+// ---------------------------------------------------------------------------
+// Riconoscimento vocale (Web Speech API): tipi minimi, nessuna dipendenza.
+// ---------------------------------------------------------------------------
+interface SpeechRecognitionAlternativeLike {
+  transcript: string
+}
+interface SpeechRecognitionResultLike {
+  0: SpeechRecognitionAlternativeLike
+  isFinal: boolean
+}
+interface SpeechRecognitionEventLike {
+  resultIndex: number
+  results: { length: number; [index: number]: SpeechRecognitionResultLike }
+}
+interface SpeechRecognitionLike {
+  lang: string
+  continuous: boolean
+  interimResults: boolean
+  start(): void
+  stop(): void
+  abort(): void
+  onresult: ((event: SpeechRecognitionEventLike) => void) | null
+  onend: (() => void) | null
+  onerror: (() => void) | null
+}
+type SpeechRecognitionCtor = new () => SpeechRecognitionLike
+
+function getSpeechRecognition(): SpeechRecognitionCtor | null {
+  if (typeof window === 'undefined') return null
+  const w = window as unknown as {
+    SpeechRecognition?: SpeechRecognitionCtor
+    webkitSpeechRecognition?: SpeechRecognitionCtor
+  }
+  return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null
+}
 
 /** Azione eseguita dall'assistente sull'interfaccia. */
 export interface UiAction {
@@ -80,7 +117,11 @@ export function AiAssistant({ open, onOpenChange, currentPage, onOpenPage, onPag
   const [messages, setMessages] = React.useState<ChatMessage[]>([])
   const [input, setInput] = React.useState('')
   const [loading, setLoading] = React.useState(false)
+  const [listening, setListening] = React.useState(false)
+  const [speakingIndex, setSpeakingIndex] = React.useState<number | null>(null)
+  const [sttSupported] = React.useState(() => getSpeechRecognition() !== null)
   const listRef = React.useRef<HTMLDivElement | null>(null)
+  const recognitionRef = React.useRef<SpeechRecognitionLike | null>(null)
   const loadedRef = React.useRef(false)
 
   // ---- cronologia: caricamento una tantum + persistenza locale ----
@@ -104,6 +145,70 @@ export function AiAssistant({ open, onOpenChange, currentPage, onOpenPage, onPag
     const list = listRef.current
     if (list) list.scrollTop = list.scrollHeight
   }, [messages, loading])
+
+  // ---- voce: pulizia alla chiusura del pannello e allo smontaggio ----
+  const stopListening = React.useCallback(() => {
+    recognitionRef.current?.stop()
+    recognitionRef.current = null
+    setListening(false)
+  }, [])
+
+  const stopSpeaking = React.useCallback(() => {
+    window.speechSynthesis?.cancel()
+    setSpeakingIndex(null)
+  }, [])
+
+  React.useEffect(() => {
+    if (open) return
+    stopListening()
+    stopSpeaking()
+  }, [open, stopListening, stopSpeaking])
+
+  React.useEffect(
+    () => () => {
+      recognitionRef.current?.abort()
+      window.speechSynthesis?.cancel()
+    },
+    []
+  )
+
+  const startListening = React.useCallback(() => {
+    const Ctor = getSpeechRecognition()
+    if (!Ctor || loading) return
+    window.speechSynthesis?.cancel() // il microfono non deve ascoltare la sintesi vocale
+    setSpeakingIndex(null)
+    const recognition = new Ctor()
+    recognition.lang = lang === 'it' ? 'it-IT' : 'en-US'
+    recognition.continuous = false
+    recognition.interimResults = true
+    let finalText = ''
+    recognition.onresult = (event) => {
+      let interim = ''
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const result = event.results[i]
+        const text = result[0]?.transcript ?? ''
+        if (result.isFinal) finalText += text
+        else interim += text
+      }
+      setInput((finalText + interim).replace(/^\s+/, ''))
+    }
+    recognition.onend = () => {
+      recognitionRef.current = null
+      setListening(false)
+    }
+    recognition.onerror = () => {
+      recognitionRef.current = null
+      setListening(false)
+    }
+    recognitionRef.current = recognition
+    setListening(true)
+    try {
+      recognition.start()
+    } catch {
+      recognitionRef.current = null
+      setListening(false)
+    }
+  }, [lang, loading])
 
   const send = React.useCallback(
     async (text: string) => {
@@ -161,6 +266,24 @@ export function AiAssistant({ open, onOpenChange, currentPage, onOpenPage, onPag
     if (loading) return
     setMessages([])
   }, [loading])
+
+  const speakMessage = React.useCallback(
+    (index: number, text: string) => {
+      if (!('speechSynthesis' in window)) return
+      window.speechSynthesis.cancel()
+      if (speakingIndex === index) {
+        setSpeakingIndex(null)
+        return
+      }
+      const utterance = new SpeechSynthesisUtterance(text)
+      utterance.lang = lang === 'it' ? 'it-IT' : 'en-US'
+      utterance.onend = () => setSpeakingIndex((cur) => (cur === index ? null : cur))
+      utterance.onerror = () => setSpeakingIndex((cur) => (cur === index ? null : cur))
+      setSpeakingIndex(index)
+      window.speechSynthesis.speak(utterance)
+    },
+    [lang, speakingIndex]
+  )
 
   const suggestions = [t('aiSuggestion1'), t('aiSuggestion2'), t('aiSuggestion3'), t('aiSuggestion4')]
 
@@ -256,6 +379,25 @@ export function AiAssistant({ open, onOpenChange, currentPage, onOpenPage, onPag
                       ))}
                     </div>
                   ) : null}
+                  {message.role === 'assistant' && 'speechSynthesis' in window ? (
+                    <button
+                      type="button"
+                      onClick={() => speakMessage(index, message.content)}
+                      aria-label={speakingIndex === index ? t('aiStopSpeaking') : t('aiSpeak')}
+                      title={speakingIndex === index ? t('aiStopSpeaking') : t('aiSpeak')}
+                      aria-pressed={speakingIndex === index}
+                      className={cn(
+                        'flex size-6 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground',
+                        speakingIndex === index && 'bg-accent text-foreground'
+                      )}
+                    >
+                      {speakingIndex === index ? (
+                        <Square className="size-3" aria-hidden />
+                      ) : (
+                        <Volume2 className="size-3.5" aria-hidden />
+                      )}
+                    </button>
+                  ) : null}
                 </div>
               ))}
               {loading ? (
@@ -284,11 +426,28 @@ export function AiAssistant({ open, onOpenChange, currentPage, onOpenPage, onPag
                 }
               }}
               rows={1}
-              placeholder={t('aiPlaceholder')}
+              placeholder={listening ? t('aiMicActive') : t('aiPlaceholder')}
               aria-label={t('aiPlaceholder')}
               className="max-h-32 min-h-10 flex-1 resize-none bg-muted/50 text-sm"
               disabled={loading}
             />
+            {sttSupported ? (
+              <Button
+                variant={listening ? 'destructive' : 'ghost'}
+                size="icon"
+                className={cn(
+                  'size-10 shrink-0 cursor-pointer',
+                  listening ? 'animate-pulse' : 'text-muted-foreground hover:text-foreground'
+                )}
+                onClick={listening ? stopListening : startListening}
+                disabled={loading}
+                aria-label={listening ? t('aiMicStop') : t('aiMicStart')}
+                title={listening ? t('aiMicStop') : t('aiMicStart')}
+                aria-pressed={listening}
+              >
+                <Mic className="size-4" aria-hidden />
+              </Button>
+            ) : null}
             <Button
               size="icon"
               className="size-10 shrink-0 cursor-pointer"

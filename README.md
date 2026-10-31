@@ -104,6 +104,10 @@ Things Notion doesn't give you — all computed **locally**, nothing ever leaves
 | ⌨️ | **Cheat sheet** (press `?`) | Every keyboard shortcut in one dialog. No web searches needed |
 | 📊 | **Stats without spies** | Word/character/reading-time stats per page, computed locally. No analytics lib, ever |
 | 🤖 | **AI assistant** (`Ctrl+Shift+A`) | A chatbot that **operates your workspace for real**: "create a Brainstorming page with 3 travel ideas", "summarize this page", "open Project". It searches, reads, writes Markdown → real blocks and opens pages; every action is confirmed with a clickable chip. Runs on a locally configured LLM endpoint — nothing leaves your machine without one |
+| 🎙 | **Voice chat** | Talk to the AI assistant: speech becomes text through the browser's built-in recognition (it/EN), and any reply can be read aloud with one tap. Zero dependencies, zero installs |
+| 📖 | **Page reader** | Read any page aloud with block-by-block highlighting, speed control and skip buttons — proofread while walking, rest your eyes, accessibility for free |
+| 📥 | **Quick capture** (`Ctrl+Shift+U`) | A thought strikes while you're deep in another page: one hotkey (or the floating button) and it lands in your Inbox page. No context switch |
+| ⏱ | **Focus timer** | Built-in pomodoro (15/25/45/60′) that survives reloads, chimes via WebAudio — no audio files, no accounts, no "pro" paywall on a kitchen timer |
 
 <div align="center">
 <table>
@@ -190,6 +194,7 @@ as a nested ZIP, and databases as Notion-compatible CSV.
 | `Ctrl/Cmd + Shift + F` | Focus mode |
 | `Ctrl/Cmd + Shift + G` | Graph view |
 | `Ctrl/Cmd + Shift + A` | AI assistant |
+| `Ctrl/Cmd + Shift + U` | Quick capture to Inbox |
 | `Ctrl/Cmd + Shift + O` | Outline panel |
 | `?` | Keyboard cheat sheet |
 | `Tab` / `Shift + Tab` | Indent / outdent block |

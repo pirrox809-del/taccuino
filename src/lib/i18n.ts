@@ -391,10 +391,47 @@ const it = {
   aiSuggestion4: 'Aggiungi una checklist “Prossimi passi” a questa pagina',
   shortcutsAi: 'Apri l\u2019assistente AI',
 
+  // Assistente AI — voce
+  aiMicStart: 'Dettatura vocale',
+  aiMicStop: 'Ferma la dettatura',
+  aiMicUnsupported: 'Dettatura non supportata da questo browser',
+  aiMicActive: 'Ti sto ascoltando…',
+  aiSpeak: 'Leggi ad alta voce',
+  aiStopSpeaking: 'Ferma la lettura',
+
+  // Lettore vocale pagina
+  readerTitle: 'Lettore vocale',
+  readerPlay: 'Riproduci la pagina',
+  readerPause: 'Pausa',
+  readerStop: 'Ferma',
+  readerPrev: 'Blocco precedente',
+  readerNext: 'Blocco successivo',
+  readerNoContent: 'Niente da leggere in questa pagina.',
+  readerSpeed: 'Velocità di lettura',
+  readerHighlightLabel: 'Blocco in lettura',
+
+  // Acquisizione rapida
+  quickCaptureTitle: 'Acquisizione rapida',
+  quickCaptureDesc: 'Un pensiero, un task, un\u2019idea: finisce nella pagina Inbox, senza interrompere quello che stai facendo.',
+  quickCapturePlaceholder: 'Scrivi qui… (Invio per salvare)',
+  quickCaptureSend: 'Salva nell\u2019Inbox',
+  quickCaptureSaved: 'Salvato nell\u2019Inbox',
+  quickCaptureOpen: 'Apri Inbox',
+  quickCaptureError: 'Salvataggio non riuscito. Riprova.',
+  shortcutsQuickCapture: 'Acquisizione rapida (Inbox)',
+
+  // Timer di concentrazione
+  timerTitle: 'Timer di concentrazione',
+  timerStart: 'Avvia',
+  timerPause: 'Pausa',
+  timerReset: 'Azzera',
+  timerDone: 'Tempo scaduto! Pausa meritata ☕',
+  timerRemaining: 'Tempo rimasto',
+
   // Accessibilità / footer
   mainContentLabel: 'Contenuto principale',
   footerLicense: 'Open source · AGPL-3.0',
-  footerVersion: '0.3',
+  footerVersion: '0.4',
   skipToContent: 'Salta al contenuto',
 } as const
 
@@ -781,10 +818,47 @@ const en: Dict = {
   aiSuggestion4: 'Add a “Next steps” checklist to this page',
   shortcutsAi: 'Open the AI assistant',
 
+  // AI assistant — voice
+  aiMicStart: 'Voice dictation',
+  aiMicStop: 'Stop dictation',
+  aiMicUnsupported: 'Dictation is not supported in this browser',
+  aiMicActive: 'Listening…',
+  aiSpeak: 'Read aloud',
+  aiStopSpeaking: 'Stop reading',
+
+  // Page reader
+  readerTitle: 'Read aloud',
+  readerPlay: 'Play page',
+  readerPause: 'Pause',
+  readerStop: 'Stop',
+  readerPrev: 'Previous block',
+  readerNext: 'Next block',
+  readerNoContent: 'Nothing to read on this page.',
+  readerSpeed: 'Reading speed',
+  readerHighlightLabel: 'Block being read',
+
+  // Quick capture
+  quickCaptureTitle: 'Quick capture',
+  quickCaptureDesc: 'A thought, a task, an idea: it lands in your Inbox page without interrupting what you are doing.',
+  quickCapturePlaceholder: 'Type here… (Enter to save)',
+  quickCaptureSend: 'Save to Inbox',
+  quickCaptureSaved: 'Saved to Inbox',
+  quickCaptureOpen: 'Open Inbox',
+  quickCaptureError: 'Could not save. Please try again.',
+  shortcutsQuickCapture: 'Quick capture (Inbox)',
+
+  // Focus timer
+  timerTitle: 'Focus timer',
+  timerStart: 'Start',
+  timerPause: 'Pause',
+  timerReset: 'Reset',
+  timerDone: 'Time\u2019s up! Take a break ☕',
+  timerRemaining: 'Time remaining',
+
   // Accessibility / footer
   mainContentLabel: 'Main content',
   footerLicense: 'Open source · AGPL-3.0',
-  footerVersion: '0.3',
+  footerVersion: '0.4',
   skipToContent: 'Skip to content',
 }
 
